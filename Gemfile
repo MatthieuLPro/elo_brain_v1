@@ -30,9 +30,13 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'httparty', '~> 0.18.1'
 
+# Dry-rb
+gem 'dry-monads', '~> 1.3'
+
 group :development, :test do
   gem 'pry-byebug', '~> 3.9.0'
   gem 'pry-rails', '= 0.3.9'
+  gem 'dotenv-rails'
 end
 
 group :development do
