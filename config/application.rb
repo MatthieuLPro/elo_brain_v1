@@ -31,5 +31,8 @@ module EloBrain
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # To read the module from lib folder
+    config.autoload_paths += Dir[config.root.join('lib')]
   end
 end

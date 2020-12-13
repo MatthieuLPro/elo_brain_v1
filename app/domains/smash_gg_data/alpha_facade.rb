@@ -6,11 +6,11 @@ module SmashGgData
       @bridge = bridge
     end
 
-    def run_alpha_end_point(params:)
+    def run_alpha_end_point(parameter:)
       @bridge.run_now(
-        query: params[:query],
-        operation_name: params[:operation_name],
-        variables: params[:variables]
+        query: parameter.query,
+        operation_name: parameter.operation_name,
+        variables: parameter.variables
       )
     end
   end

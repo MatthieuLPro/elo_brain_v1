@@ -32,3 +32,6 @@ yarn-debug.log*
 
 # Ignore environment variable
 .env
+
+# Ignore ruby mine IDE metadata
+.idea
