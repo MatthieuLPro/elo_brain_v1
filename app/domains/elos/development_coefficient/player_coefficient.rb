@@ -5,12 +5,11 @@ module Elos
     class PlayerCoefficient
       def call(nb_matches:, elo:)
         klass = DevelopmentCoefficient::RunConditions.new(
+          Conditions::Default.new,
           Conditions::Starting.new(nb_matches: nb_matches),
           Conditions::Amateur.new(elo: elo),
-          Conditions::Pro.new(elo: elo),
-          Conditions::Default.new
+          Conditions::Pro.new(elo: elo)
         ).condition.class
-
         coefficient(klass)
       end
 
