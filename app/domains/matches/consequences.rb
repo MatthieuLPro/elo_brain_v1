@@ -7,25 +7,16 @@ module Matches
     end
 
     def call(new_elos: Elos::NewElos)
-      new_elos.new(winner: winner, looser: looser).call
+      new_elos.new(
+        winner: player(Player.find(@match.winner.id).elos),
+        looser: player(Player.find(@match.looser.id).elos)
+      ).call
     end
 
     private
 
-    def winner
-      player = Player.find(@match.winner)
-      Players::Player.new(
-        nb_matches: player.elos.count,
-        current_elo: player.elos.last_level
-      )
-    end
-
-    def looser
-      player = Player.find(@match.looser)
-      Players::Player.new(
-        nb_matches: player.elos.count,
-        current_elo: player.elos.last_level
-      )
+    def player(elos)
+      Players::Player.with_verification_on(elos)
     end
   end
 end
