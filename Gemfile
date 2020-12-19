@@ -32,7 +32,8 @@ gem 'httparty', '~> 0.18.1'
 
 # Dry-rb
 gem 'dry-monads', '~> 1.3'
-gem 'dry-struct', '~> 1.3.0'
+gem 'dry-struct', '~> 1.0.0'
+gem 'dry-validation', '~>1.6'
 
 group :development, :test do
   gem 'pry-byebug', '~> 3.9.0'

@@ -6,8 +6,6 @@ module Alpha
     attribute :after_date, Types::Strict::String.constrained(format: /\d{10}/)
 
     def self.with_timestamp(before_date:, after_date:)
-      return Errors::DatesInconsistency if before_date.to_i <= after_date.to_i
-
       new(
         before_date: before_date,
         after_date: after_date

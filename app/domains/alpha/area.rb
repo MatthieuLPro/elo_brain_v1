@@ -10,7 +10,6 @@ module Alpha
     }.freeze
     COORDINATES_CONSTRAINED = /(\A\d{1,3}\.\d{1,4},\d{1,3}\.\d{1,4}\z|online)/.freeze
     DEFAULT_RADIUS = '31mi'
-    RADIUS_CONSTRAINED = /\d{1,3}\mi{1}\z/.freeze
 
     attribute :coordinates, Types::Strict::String.constrained(format: COORDINATES_CONSTRAINED)
     attribute :radius, Types::Strict::String.constrained(format: RADIUS_CONSTRAINED)
