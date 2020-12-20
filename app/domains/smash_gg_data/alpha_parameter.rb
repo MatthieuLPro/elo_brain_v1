@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-module Alpha
-  class Parameter < Dry::Struct
+module SmashGgData
+  class AlphaParameter < Dry::Struct
     attribute :query, Types::Strict::String
-    attribute :operation_name, Types::String.optional
+    attribute :operation_name, Types::Strict::String.optional
     attribute :variables, Types::JSON::Hash.optional
   end
 end

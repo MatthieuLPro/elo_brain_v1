@@ -2,5 +2,5 @@
 
 class Ranking < ApplicationRecord
   belongs_to :game
-  has_many :tournaments, dependent: :destroy
+  has_many :events, dependent: :destroy
 end

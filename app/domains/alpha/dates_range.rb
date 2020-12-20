@@ -5,10 +5,10 @@ module Alpha
     attribute :before_date, Types::Strict::String.constrained(format: /\d{10}/)
     attribute :after_date, Types::Strict::String.constrained(format: /\d{10}/)
 
-    def self.with_timestamp(before_date:, after_date:)
+    def self.from_contract_data(contract)
       new(
-        before_date: before_date,
-        after_date: after_date
+        before_date: contract[:before_date],
+        after_date: contract[:after_date]
       )
     end
   end

@@ -12,9 +12,9 @@ module Alpha
 
     attribute :video_game_id, Types::Strict::String.constrained(format: ID_CONSTRAINED)
 
-    def self.with_name(name:)
+    def self.from_contract_data(contract)
       new(
-        video_game_id: IDS_COLLECTION[name.to_sym]
+        video_game_id: IDS_COLLECTION[contract[:name].to_sym]
       )
     end
   end

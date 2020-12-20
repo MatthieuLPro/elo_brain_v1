@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Tournament < ApplicationRecord
+class Event < ApplicationRecord
   belongs_to :ranking
   has_many :matches, dependent: :destroy
 end

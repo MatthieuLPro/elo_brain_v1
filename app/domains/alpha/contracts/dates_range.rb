@@ -17,7 +17,7 @@ module Alpha
       end
 
       rule(:before_date, :after_date) do
-        key.failure('must be after before_date') if values[:after_date] < values[:before_date]
+        key.failure('after_date must be before before_date') if values[:after_date] >= values[:before_date]
       end
     end
   end

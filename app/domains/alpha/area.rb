@@ -12,13 +12,19 @@ module Alpha
     DEFAULT_RADIUS = '31mi'
 
     attribute :coordinates, Types::Strict::String.constrained(format: COORDINATES_CONSTRAINED)
-    attribute :radius, Types::Strict::String.constrained(format: RADIUS_CONSTRAINED)
+    attribute :radius, Types::Strict::String
 
-    def self.with_place(place:, radius: DEFAULT_RADIUS)
+    def self.from_contract_data(contract)
       new(
-        coordinates: COORDINATES[place.to_sym],
-        radius: radius
+        coordinates: COORDINATES[contract[:place].to_sym],
+        radius: radius_condition(contract[:radius])
       )
+    end
+
+    def self.radius_condition(value)
+      return DEFAULT_RADIUS if value.empty?
+
+      value
     end
   end
 end

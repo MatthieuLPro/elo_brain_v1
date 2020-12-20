@@ -22,10 +22,15 @@ module Alpha
               nodes {
                 id
                 name
+                city
                 startAt
                 events {
                   id
-                  videogameId
+                  numEntrants
+                  videogame {
+                    id
+                    name
+                  }
                 }
               }
             }
