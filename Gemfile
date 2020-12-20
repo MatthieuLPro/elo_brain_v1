@@ -35,6 +35,9 @@ gem 'dry-monads', '~> 1.3'
 gem 'dry-struct', '~> 1.0.0'
 gem 'dry-validation', '~>1.6'
 
+# Authentification
+gem 'jwt', '~> 2.2.2'
+
 group :development, :test do
   gem 'pry-byebug', '~> 3.9.0'
   gem 'pry-rails', '= 0.3.9'
