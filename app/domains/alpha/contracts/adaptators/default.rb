@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
+# Need to copy design from matches domain
 module Alpha
   module Contracts
     module Adaptators
-      # Should probably find a better design pattern
-      class Standard
+      class Default
         def initialize(contract:)
           @contract = contract
         end

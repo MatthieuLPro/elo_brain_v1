@@ -3,6 +3,7 @@
 module SmashGgFetching
   module TournamentByGameLocationDate
     class CreateQuery
+      DAY = 86_400
       AFTER_DATE = 1_606_829_462
       PER_PAGE = '10'
 
@@ -14,37 +15,30 @@ module SmashGgFetching
 
       def call
         query_parameters = create_query_parameters(
-          create_area_object,
-          create_dates_range_object,
-          create_game_object
+          create_area_entity,
+          create_dates_range_entity,
+          create_game_entity
         )
         Alpha::Queries::Tournaments::ByGameLocationDate.new.call(params: query_parameters)
       end
 
       private
 
-      def create_area_object
-        adapted_contract = Alpha::Contracts::AdaptedContract.new.call(
-          contract: Alpha::Contracts::Area.new.call(place: @place, radius: @radius),
-          adaptator: Alpha::Contracts::Adaptators::Standard
-        )
-        Alpha::Area.from_contract_data(adapted_contract)
+      def create_area_entity
+        SmashGgFetching::CreateEntityWithContract.new(contract: Alpha::Contracts::Area.new.call(place: @place, radius: @radius))
+                                                 .call(entity: Alpha::Entities::Area)
       end
 
-      def create_dates_range_object
-        adapted_contract = Alpha::Contracts::AdaptedContract.new.call(
-          contract: Alpha::Contracts::DatesRange.new.call(before_date: Time.now.to_i, after_date: AFTER_DATE),
+      def create_dates_range_entity
+        SmashGgFetching::CreateEntityWithContract.new(
+          contract: Alpha::Contracts::DatesRange.new.call(before_date: Time.now.to_i - DAY, after_date: AFTER_DATE),
           adaptator: Alpha::Contracts::Adaptators::DatesRange
-        )
-        Alpha::DatesRange.from_contract_data(adapted_contract)
+        ).call(entity: Alpha::Entities::DatesRange)
       end
 
-      def create_game_object
-        adapted_contract = Alpha::Contracts::AdaptedContract.new.call(
-          contract: Alpha::Contracts::Game.new.call(name: @game),
-          adaptator: Alpha::Contracts::Adaptators::Standard
-        )
-        Alpha::Game.from_contract_data(adapted_contract)
+      def create_game_entity
+        SmashGgFetching::CreateEntityWithContract.new(contract: Alpha::Contracts::Game.new.call(name: @game))
+                                                 .call(entity: Alpha::Entities::Game)
       end
 
       def create_query_parameters(area, dates_range, game)

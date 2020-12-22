@@ -7,20 +7,13 @@ module SmashGgFetching
 
       def call(id:)
         query_parameters = create_query_parameters(
-          create_id_object(id)
+          SmashGgFetching::CreateEntityWithContract.new(contract: Alpha::Contracts::Id.new.call(number: id))
+                                                   .call(entity: Alpha::Entities::Id)
         )
         Alpha::Queries::Events::ById.new.call(params: query_parameters)
       end
 
       private
-
-      def create_id_object(id)
-        adapted_contract = Alpha::Contracts::AdaptedContract.new.call(
-          contract: Alpha::Contracts::Id.new.call(number: id),
-          adaptator: Alpha::Contracts::Adaptators::Standard
-        )
-        Alpha::Id.from_contract_data(adapted_contract)
-      end
 
       def create_query_parameters(id)
         Alpha::Parameters::Events::ById.new(

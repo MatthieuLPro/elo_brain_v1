@@ -14,7 +14,7 @@ module JSON
     private
 
     def from_hash(hash, searched_key)
-      hash.keys.each do |key|
+      hash.each_key do |key|
         object = hash[key]
         return object if key == searched_key
 

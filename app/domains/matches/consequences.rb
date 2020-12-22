@@ -2,14 +2,14 @@
 
 module Matches
   class Consequences
-    def initialize(match:)
-      @match = match
+    def initialize(result:)
+      @result = result
     end
 
     def call(new_elos: Elos::NewElos)
       new_elos.new(
-        winner: player(Player.find(@match.winner.id).elos),
-        looser: player(Player.find(@match.looser.id).elos)
+        winner: player(::Player.find(@result.winner_id).elos),
+        looser: player(::Player.find(@result.looser_id).elos)
       ).call
     end
 

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
+# Need to copy design from matches domain
 module Alpha
   module Contracts
     module Adaptators
-      # Should probably find a better design pattern
-      class DatesRange < Standard
+      class DatesRange < Default
         private
 
         def data

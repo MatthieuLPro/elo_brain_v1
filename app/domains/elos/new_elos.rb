@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: This must return an object (dry::struct)
 module Elos
   class NewElos
     def initialize(winner:, looser:)
