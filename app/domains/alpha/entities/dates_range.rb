@@ -3,8 +3,8 @@
 module Alpha
   module Entities
     class DatesRange < Dry::Struct
-      attribute :before_date, Types::Strict::String.constrained(format: /\d{10}/)
-      attribute :after_date, Types::Strict::String.constrained(format: /\d{10}/)
+      attribute :before_date, Types::Strict::String
+      attribute :after_date, Types::Strict::String
 
       def self.from_contract(contract:)
         new(

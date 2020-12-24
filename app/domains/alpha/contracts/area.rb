@@ -3,20 +3,20 @@
 module Alpha
   module Contracts
     class Area < Dry::Validation::Contract
-      PLACES_COLLECTION = %w[paris lyon marseille online].freeze
+      COORDINATES_CONSTRAINED = /(\A\d{1,3}\.\d{1,4},\d{1,3}\.\d{1,4}\z|online)/.freeze
       RADIUS_FORMAT = /\d{1,3}\mi{1}\z/.freeze
 
       params do
-        required(:place).value(:string)
+        required(:coordinates).value(:string)
         required(:radius).value(:string)
       end
 
-      rule(:place) do
-        key.failure('must be in the list') unless PLACES_COLLECTION.include? value
+      rule(:coordinates) do
+        key.failure('must be in coordinate format or to be online') unless value.match(COORDINATES_CONSTRAINED)
       end
 
       rule(:radius) do
-        key.failure('must respect a specific format') unless value.match(RADIUS_FORMAT) || value.empty?
+        key.failure('must be in radius format') unless value.match(RADIUS_FORMAT)
       end
     end
   end

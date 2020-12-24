@@ -3,11 +3,7 @@
 module Alpha
   module Contracts
     module Adaptators
-      class Default < Adaptator
-        def data
-          @contract.values.data
-        end
-      end
+      class UnknownAdaptatorError < StandardError; end
     end
   end
 end
