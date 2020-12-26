@@ -57,7 +57,7 @@ module SmashGgFetching
           radius: area.radius,
           before_date: dates_range.before_date,
           after_date: dates_range.after_date,
-          video_game_id: game.video_game_id
+          game_id: game.game_id
         )
       end
     end

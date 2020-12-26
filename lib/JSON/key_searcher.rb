@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: Replace methods by dig
 module JSON
   class KeySearcher
     def initialize(json:)

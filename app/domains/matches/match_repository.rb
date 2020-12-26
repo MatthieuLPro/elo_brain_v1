@@ -5,5 +5,9 @@ module Matches
     def create(event_id:, winner_id:, looser_id:)
       ::Match.create(event_id: event_id, winner_id: winner_id, looser_id: looser_id)
     end
+
+    def nb_matches_by_elos(elos_collection:)
+      elos_collection.count
+    end
   end
 end

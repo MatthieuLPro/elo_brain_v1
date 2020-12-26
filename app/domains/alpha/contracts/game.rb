@@ -4,9 +4,17 @@ module Alpha
   module Contracts
     class Game < Dry::Validation::Contract
       IDS_FORMAT = /\d{1,4}/.freeze
+      MIN_LENGTH = 1
+      MAX_LENGTH = 4
 
       params do
         required(:game_id).value(:string)
+      end
+
+      rule(:game_id) do
+        unless value.length.between?(MIN_LENGTH, MAX_LENGTH)
+          key.failure('must be in a length between 1 and 4 (include)')
+        end
       end
 
       rule(:game_id) do

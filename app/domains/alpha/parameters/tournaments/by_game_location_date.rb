@@ -9,7 +9,7 @@ module Alpha
         attribute :radius, Types::Strict::String
         attribute :before_date, Types::Strict::String
         attribute :after_date, Types::Strict::String
-        attribute :video_game_id, Types::Strict::String
+        attribute :game_id, Types::Strict::String
       end
     end
   end

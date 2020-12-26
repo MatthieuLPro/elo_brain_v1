@@ -2,14 +2,14 @@
 
 module SmashGgFetching
   class CreateEntityWithContract
-    def initialize(contract:, adaptator: nil)
+    def initialize(contract:, adapter: nil)
       @contract = contract
-      @adaptator = adaptator
+      @adapter = adapter
     end
 
     def call(entity:)
-      adapted_contract = Alpha::Contracts::Adaptators::AdaptedContract
-                         .new(adaptator: @adaptator)
+      adapted_contract = Contracts::AdaptedContract
+                         .new(adapter: @adapter)
                          .call(contract: @contract)
       entity.from_contract(contract: adapted_contract)
     end

@@ -15,7 +15,7 @@ module Alpha
                 },
                 afterDate: #{params.after_date},
                 beforeDate: #{params.before_date},
-                videogameIds: #{params.video_game_id}
+                videogameIds: #{params.game_id}
               }
             })
             {
