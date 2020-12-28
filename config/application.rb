@@ -34,5 +34,7 @@ module EloBrain
 
     # To read the module from lib folder
     config.autoload_paths += Dir[config.root.join('lib')]
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end

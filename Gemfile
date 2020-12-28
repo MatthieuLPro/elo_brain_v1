@@ -28,6 +28,7 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+# Http request
 gem 'httparty', '~> 0.18.1'
 
 # Dry-rb
@@ -37,6 +38,10 @@ gem 'dry-validation', '~>1.6'
 
 # Authentification
 gem 'jwt', '~> 2.2.2'
+
+# Job processing service
+gem 'sidekiq', '~> 6.0.2'
+gem 'sidekiq-cron', '~> 1.2.0'
 
 group :development, :test do
   gem 'pry-byebug', '~> 3.9.0'

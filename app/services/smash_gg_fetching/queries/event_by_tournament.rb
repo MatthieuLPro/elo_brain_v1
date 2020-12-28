@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module SmashGgFetching
-  module EventByTournament
-    class CreateQuery
+  module Queries
+    class EventByTournament
       PER_PAGE = 200
 
       def call(id:)
