@@ -3,8 +3,7 @@
 module Contracts
   class ContractAdapterFactory
     ADAPTER_IDENTIFIER = {
-      default: Default,
-      dates_range: DatesRange
+      default: DefaultContractAdapter
     }.freeze
 
     def from_identifier(identifier:)
