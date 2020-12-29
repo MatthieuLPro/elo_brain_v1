@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: Remove those functions into repositories file
 module Matches
   class MatchRepository
     def create(event_id:, winner_id:, looser_id:)

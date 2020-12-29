@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # TODO: Need to inject here the Match::Player object and create here
+# TODO: Remove those functions into repositories file
 module Players
   class PlayerRepository
     def player_id(name:)

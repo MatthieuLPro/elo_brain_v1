@@ -1,0 +1,5 @@
+<ul>
+  <% @matches.each do |match| %>
+    <li><%= match.event_id %> - winner: <%= match.winner_id %> - looser: <%= match.looser_id %></li>
+  <% end %>
+</ul>

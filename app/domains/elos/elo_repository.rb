@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: Remove those functions into repositories file
 module Elos
   class EloRepository
     def create(player_id:, level:, match_id:)

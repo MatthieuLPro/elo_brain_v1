@@ -6,8 +6,21 @@ Rails.application.routes.draw do
     end
   end
 
-  # Sidekiq monitoring
-  require 'sidekiq/web'
-  require 'sidekiq/cron/web'
-  mount Sidekiq::Web => '/sidekiq'
+  # Sessions
+  resources :sessions, only: %i[new create destroy]
+
+  # Admin
+  namespace :admin do
+    get '/home', to: 'home#home'
+    get '/events', to: 'home#events'
+    get '/matches', to: 'home#matches'
+    get '/players', to: 'home#players'
+
+    # Sidekiq monitoring
+    require 'sidekiq/web'
+    require 'sidekiq/cron/web'
+    require 'admin_constraint'
+    mount Sidekiq::Web => '/sidekiq', :constraints => AdminConstraint.new
+  end
+
 end
