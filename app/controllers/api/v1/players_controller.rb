@@ -2,17 +2,19 @@
 
 module Api
   module V1
-    # All the methods are for the moment secured
-    # Maybe it should be better to remove the securedController
-    # and to create a private method which do the job for
-    # specific methods inside the playersController
-    class PlayersController < SecuredController
+    class PlayersController < ApplicationController
+      before_action :authenticate_client
+
       def index
-        render json: { players: Player.all }
+        render json: { players: PlayersRepo.new.index }
       end
 
-      def show
-        render json: { test: 'john' }
+      private
+
+      def authenticate_client
+        ApiConstraint.authorize_request(headers: request.headers)
+      rescue JWT::VerificationError, JWT::DecodeError
+        render json: { errors: ['Not authenticated'] }, status: :unauthorized
       end
     end
   end
