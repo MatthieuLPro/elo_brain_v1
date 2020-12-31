@@ -7,7 +7,9 @@ module SmashGgFetching
 
     def call(place:, radius:, game:)
       query = create_query_for_api(place, radius, game)
-      smash_gg_data = fetch_data_from_api(query)
+      smash_gg_data = fetch_data_from_api(query).as_json
+      return {} unless smash_gg_data.dig('value', 'data', 'tournaments', 'nodes')
+
       create_object_from_data(smash_gg_data)
     end
 
