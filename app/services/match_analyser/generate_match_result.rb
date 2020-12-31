@@ -38,7 +38,7 @@ module MatchAnalyser
       ADAPTED_CONTRACT_CREATOR.new
                               .call(contract: AdaptedContracts::Player.new
                                                                        .call(
-                                                                         id: Players::PlayerRepository.new.player_id(name: name),
+                                                                         id: Players::FindOrCreate.new.call(name: name),
                                                                          name: name,
                                                                          score: score
                                                                        ))

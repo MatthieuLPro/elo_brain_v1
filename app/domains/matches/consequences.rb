@@ -2,6 +2,7 @@
 
 module Matches
   class Consequences
+    REPOSITORY = ElosRepo.new
     def initialize(result:)
       @result = result
     end
@@ -16,7 +17,7 @@ module Matches
     private
 
     def elos_by_player(id)
-      Elos::EloRepository.new.elos_by_player(player_id: id)
+      REPOSITORY.index_per_player(player_id: id)
     end
 
     def player_information(elos_collection)
@@ -29,7 +30,7 @@ module Matches
     end
 
     def nb_matches(elos_collection)
-      Matches::MatchRepository.new.nb_matches_by_elos(elos_collection: elos_collection)
+      MatchesRepo.new.nb_matches_by(elos_collection: elos_collection)
     end
 
     def current_player_elo(elos_collection)

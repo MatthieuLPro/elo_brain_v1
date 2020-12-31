@@ -6,6 +6,10 @@ module Admin
 
     def home; end
 
+    def rankings
+      @ranking = ::RankingsRepo.new.index
+    end
+
     def events
       @events = ::ElosRepo.new.index
     end

@@ -15,7 +15,7 @@ module EventAnalyser
 
         display_score = Regex::DisplayScore.new.call(expression: match[MATCH_NODE])
         match_result = MatchAnalyser::GenerateMatchResult.new.call(display_score: display_score)
-        current_match = Matches::MatchRepository.new.create(event_id: @event_id, winner_id: match_result.winner_id, looser_id: match_result.looser_id)
+        current_match = MatchesRepo.new.create_from(event_id: @event_id, winner_id: match_result.winner_id, looser_id: match_result.looser_id)
         MatchAnalyser::GenerateNewElos.new(match_result: match_result, match_id: current_match.id).call
       end
     end

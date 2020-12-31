@@ -3,12 +3,12 @@
 require 'rails_helper'
 
 module Players
-  describe PlayerRepository do
+  describe FindOrCreate do
     let(:instance) { described_class.new }
     let!(:player) { FactoryBot.create(:player, name: 'foo', id: 1) }
 
-    describe '#player_id' do
-      subject { instance.player_id(name: name) }
+    describe '#call' do
+      subject { instance.call(name: name) }
       context 'with existing player' do
         let(:name) { 'foo' }
 

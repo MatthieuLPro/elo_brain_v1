@@ -2,7 +2,7 @@
 
 module EventAnalyser
   class EventsCollection
-    REPOSITORY = Events::EventRepository.new
+    REPOSITORY = EventsRepo.new
     MATCHES_COLLECTION = EventAnalyser::MatchesCollection
 
     def initialize(events_collection:)
@@ -22,7 +22,7 @@ module EventAnalyser
     private
 
     def create_event(name)
-      REPOSITORY.create(name: name)
+      REPOSITORY.create_by(name: name)
     end
   end
 end

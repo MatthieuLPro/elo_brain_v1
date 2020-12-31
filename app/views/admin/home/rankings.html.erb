@@ -1,0 +1,5 @@
+<ul>
+  <% @rankings&.each do |ranking| %>
+    <li>Game: <%= ranking.game.name %> - Start date: <%= ranking.start_date %> - End date: <%= ranking.end_date %></li>
+  <% end %>
+</ul>

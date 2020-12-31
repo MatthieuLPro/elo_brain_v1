@@ -2,6 +2,10 @@
 
 class EventsRepo
   def index
-    Events.all
+    Event.all
+  end
+
+  def create_by(name:)
+    Event.create(name: name)
   end
 end
