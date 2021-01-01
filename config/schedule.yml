@@ -1,5 +1,5 @@
 update_tournaments_smub_paris:
-  cron: '0 2 * * */1'
+  cron: '0 2 * * *'
   class: "UpdateTournamentsJob"
   queue: 'super_smash_bros_ultimate'
   args:
@@ -7,7 +7,7 @@ update_tournaments_smub_paris:
     - ''
     - 'super_smash_bros_ultimate'
 update_tournaments_tekken7_paris:
-  cron: '0 2 * * */1'
+  cron: '0 2 * * *'
   class: "UpdateTournamentsJob"
   queue: 'tekken7'
   args:
@@ -15,7 +15,7 @@ update_tournaments_tekken7_paris:
     - ''
     - 'tekken7'
 update_tournaments_dead_or_alive6_paris:
-  cron: '0 2 * * */1'
+  cron: '0 2 * * *'
   class: "UpdateTournamentsJob"
   queue: 'dead_or_alive6'
   args:
@@ -23,7 +23,7 @@ update_tournaments_dead_or_alive6_paris:
     - ''
     - 'dead_or_alive6'
 update_tournaments_mortal_kombat11_paris:
-  cron: '0 2 * * */1'
+  cron: '0 2 * * *'
   class: "UpdateTournamentsJob"
   queue: 'mortal_kombat11'
   args:
