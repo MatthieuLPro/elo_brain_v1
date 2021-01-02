@@ -40,8 +40,7 @@ gem 'dry-validation', '~>1.6'
 gem 'jwt', '~> 2.2.2'
 
 # Job processing service
-gem 'sidekiq', '~> 6.0.2'
-gem 'sidekiq-cron', '~> 1.2.0'
+gem 'sidekiq', '~> 6.1.1'
 
 group :development, :test do
   gem 'pry-byebug', '~> 3.9.0'

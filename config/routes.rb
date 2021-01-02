@@ -19,7 +19,6 @@ Rails.application.routes.draw do
 
     # Sidekiq monitoring
     require 'sidekiq/web'
-    require 'sidekiq/cron/web'
     require 'admin_constraint'
     mount Sidekiq::Web => '/sidekiq', :constraints => AdminConstraint.new
   end
