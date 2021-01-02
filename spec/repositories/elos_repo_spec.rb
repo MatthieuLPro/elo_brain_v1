@@ -11,8 +11,8 @@ describe ElosRepo do
 
   let!(:match1) { FactoryBot.create(:match, event: event1, winner: player1, looser: player2, id: 1) }
 
-  let!(:elo1) { FactoryBot.create(:elo, match: match1, player: player1, level: 1_000)}
-  let!(:elo2) { FactoryBot.create(:elo, match: match1, player: player2, level: 1_100)}
+  let!(:elo1) { FactoryBot.create(:elo, match: match1, player: player1, level: 1_000) }
+  let!(:elo2) { FactoryBot.create(:elo, match: match1, player: player2, level: 1_100) }
 
   describe '#index' do
     subject { instance.index }

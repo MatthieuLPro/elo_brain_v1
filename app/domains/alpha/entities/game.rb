@@ -3,11 +3,11 @@
 module Alpha
   module Entities
     class Game < Dry::Struct
-      attribute :game_id, Types::Strict::String
+      attribute :id, Types::Strict::String
 
       def self.from_contract(contract:)
         new(
-          game_id: contract[:game_id]
+          id: contract[:game_id]
         )
       end
     end

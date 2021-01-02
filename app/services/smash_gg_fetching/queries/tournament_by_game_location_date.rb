@@ -5,8 +5,8 @@ module SmashGgFetching
     class TournamentByGameLocationDate
       DAY = 86_400
       BEFORE_DATE = (Time.now.to_i - DAY).to_s
-      AFTER_DATE = (Time.now.to_i - DAY * 2).to_s
-      PER_PAGE_DEFAULT = '10'
+      AFTER_DATE = (Time.now.to_i - DAY * 30).to_s
+      EVENTS_PER_PAGE_DEFAULT = 10
 
       def call(place:, radius:, game:)
         query_parameters = create_query_parameters(
@@ -14,7 +14,7 @@ module SmashGgFetching
           create_dates_range_entity,
           create_game_entity(game)
         )
-        Alpha::Queries::Tournaments::ByGameLocationDate.new.call(params: query_parameters)
+        Alpha::Queries::TournamentsByGameLocationDate.new.call(params: query_parameters)
       end
 
       private
@@ -40,14 +40,13 @@ module SmashGgFetching
       end
 
       def create_query_parameters(area, dates_range, game)
-        Alpha::Parameters::Tournaments::ByGameLocationDate.new(
-          per_page: PER_PAGE_DEFAULT,
-          coordinates: area.coordinates,
-          radius: area.radius,
-          before_date: dates_range.before_date,
-          after_date: dates_range.after_date,
-          game_id: game.game_id
-        )
+        game_adapted_contract = AdaptedContracts::Creator.new.call(contract: AdaptedContracts::TournamentsParameters.new.call(
+          events_per_page: EVENTS_PER_PAGE_DEFAULT,
+          area: area,
+          dates_range: dates_range,
+          game: game
+        ))
+        MatchAnalyser::EntityCreator.new(entity: Alpha::Entities::TournamentsParameters).call(adapted_contract: game_adapted_contract)
       end
     end
   end
