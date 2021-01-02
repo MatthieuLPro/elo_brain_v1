@@ -2,7 +2,7 @@
 
 module AdaptedContracts
   class Area
-    DEFAULT = Alpha::Contracts::Area.new
+    DEFAULT = SmashGg::Contracts::Area.new
     def initialize(contract: DEFAULT)
       @contract = contract
     end

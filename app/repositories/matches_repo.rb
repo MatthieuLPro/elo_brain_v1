@@ -13,8 +13,8 @@ class MatchesRepo
     Match.where(winner_id: player_id).or(Match.where(looser_id: player_id))
   end
 
-  def create_from(event_id:, winner_id:, looser_id:)
-    Match.create(event_id: event_id, winner_id: winner_id, looser_id: looser_id)
+  def create_from(event_id:, winner_id:, looser_id:, completed_at:)
+    Match.create(event_id: event_id, winner_id: winner_id, looser_id: looser_id, completed_at: completed_at)
   end
 
   def nb_matches_by(elos_collection:)

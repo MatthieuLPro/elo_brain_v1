@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_29_205713) do
+ActiveRecord::Schema.define(version: 2021_01_02_172629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2020_12_29_205713) do
     t.bigint "event_id", null: false
     t.bigint "winner_id", null: false
     t.bigint "looser_id", null: false
+    t.datetime "completed_at", null: false
     t.index ["event_id"], name: "index_matches_on_event_id"
     t.index ["looser_id"], name: "index_matches_on_looser_id"
     t.index ["winner_id"], name: "index_matches_on_winner_id"
@@ -42,6 +43,14 @@ ActiveRecord::Schema.define(version: 2020_12_29_205713) do
 
   create_table "players", force: :cascade do |t|
     t.string "name", null: false
+  end
+
+  create_table "rankings", force: :cascade do |t|
+    t.bigint "game_id", null: false
+    t.date "start_date", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.date "end_date", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "created_at", null: false
+    t.index ["game_id"], name: "index_rankings_on_game_id"
   end
 
   create_table "users", force: :cascade do |t|

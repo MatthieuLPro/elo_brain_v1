@@ -11,8 +11,8 @@ describe MatchesRepo do
   let!(:player2) { FactoryBot.create(:player, name: 'bar', id: 2) }
   let!(:player3) { FactoryBot.create(:player, name: 'oof', id: 3) }
 
-  let!(:match1) { FactoryBot.create(:match, event: event1, winner: player1, looser: player2) }
-  let!(:match2) { FactoryBot.create(:match, event: event2, winner: player2, looser: player3) }
+  let!(:match1) { FactoryBot.create(:match, event: event1, winner: player1, looser: player2, completed_at: Time.now) }
+  let!(:match2) { FactoryBot.create(:match, event: event2, winner: player2, looser: player3, completed_at: Time.now) }
 
   describe '#index' do
     subject { instance.index }
@@ -45,11 +45,12 @@ describe MatchesRepo do
   end
 
   describe '#create_from' do
-    subject { instance.create_from(event_id: event_id, winner_id: winner_id, looser_id: looser_id) }
+    subject { instance.create_from(event_id: event_id, winner_id: winner_id, looser_id: looser_id, completed_at: completed_at) }
     context 'with valid parameters' do
       let(:event_id) { 1 }
       let(:winner_id) { 1 }
       let(:looser_id) { 2 }
+      let(:completed_at) { Time.now }
 
       it 'creates a match' do
         expect { subject }.to change { ::Match.count }.by(1)

@@ -3,15 +3,12 @@
 class UpdateTournamentsJob < ApplicationJob
   EMPTY_DATA = 'Data is empty'
   def perform(place, radius, game)
-    tournaments = SmashGgFetching::Tournaments.new.call(
-      place: place,
-      radius: radius,
-      game: game
-    )
+    query = ApiQueries::SmashGg::TournamentFromGameLocationDate.new.call(place: place, radius: radius, game: game)
+    tournaments = TournamentAnalyser::CreateCollectionFromApi.new.call(query: query)
     return EMPTY_DATA if tournaments.empty?
 
     EventAnalyser::EventsCollectionPerTournament.new(
-      tournaments: SmashGgFetching::CreateEventsFromTournament.new.call(tournaments: tournaments)
+      tournaments: EventAnalyser::CreateEventsFromTournament.new.call(tournaments: tournaments)
     ).call
   end
 end

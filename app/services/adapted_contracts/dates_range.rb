@@ -2,7 +2,7 @@
 
 module AdaptedContracts
   class DatesRange
-    DEFAULT = Alpha::Contracts::DatesRange.new
+    DEFAULT = SmashGg::Contracts::DatesRange.new
     def initialize(contract: DEFAULT)
       @contract = contract
     end

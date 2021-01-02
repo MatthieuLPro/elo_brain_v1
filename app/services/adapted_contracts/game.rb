@@ -2,7 +2,7 @@
 
 module AdaptedContracts
   class Game
-    DEFAULT = Alpha::Contracts::Game.new
+    DEFAULT = SmashGg::Contracts::Game.new
     def initialize(contract: DEFAULT)
       @contract = contract
     end

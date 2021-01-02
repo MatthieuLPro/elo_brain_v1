@@ -2,7 +2,7 @@
 
 module AdaptedContracts
   class TournamentsParameters
-    DEFAULT = Alpha::Contracts::TournamentsParameters.new
+    DEFAULT = SmashGg::Contracts::TournamentsParameters.new
     def initialize(contract: DEFAULT)
       @contract = contract
     end
