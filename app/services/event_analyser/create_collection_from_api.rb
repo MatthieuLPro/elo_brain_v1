@@ -4,6 +4,8 @@ module EventAnalyser
   class CreateCollectionFromApi
     QUERY = ApiQueries::SmashGg::EventFromTournament
     API_TO_FETCH = ApiCall::SmashGg.new
+    NUMBER_PLAYERS = 'numEntrants'
+    EVENT_ID = 'id'
 
     def initialize(events:)
       @events = events
@@ -11,9 +13,9 @@ module EventAnalyser
 
     def call
       @events.map do |event|
-        next unless event['numEntrants'].positive?
+        next unless event[NUMBER_PLAYERS].positive?
 
-        query = api_query(event['id'])
+        query = api_query(event[EVENT_ID])
         api_data = api_data(query)
         create_collection(api_data)
       end.compact

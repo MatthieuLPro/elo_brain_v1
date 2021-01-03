@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: Remove this to decorators adapters
 module SmashGg
   module Entities
     module Decorators

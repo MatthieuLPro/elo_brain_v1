@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Tournaments
-  module Collection
+  module Collections
     class TournamentsFromApi
       DEFAULT_API = ApiCall::SmashGg.new
 

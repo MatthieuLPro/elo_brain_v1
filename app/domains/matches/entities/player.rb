@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# TODO: Should be remove here
+# Add information in player::information entity
 module Matches
   module Entities
     class Player < Dry::Struct

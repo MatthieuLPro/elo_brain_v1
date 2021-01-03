@@ -18,8 +18,8 @@ module Matches
       context 'without specific NewElos class' do
         let(:result) { match_result }
 
-        it 'expected to create an hash' do
-          expect(subject.class).to eq(Hash)
+        it 'expected to create an NewElos entity' do
+          expect(subject.class).to eq(Elos::Entities::NewElos)
         end
 
         it 'expected to has a winner' do
