@@ -4,7 +4,7 @@ require 'rails_helper'
 
 module Matches
   module Entities
-    describe Player do
+    describe PlayerResult do
       let(:instance) { described_class }
 
       describe '#from_contract' do
@@ -13,13 +13,12 @@ module Matches
           let(:contract) do
             {
               id: 1,
-              name: 'foo',
               score: 2
             }
           end
 
           it 'expected to create an object' do
-            expect(subject.class).to eq(Matches::Entities::Player)
+            expect(subject.class).to eq(described_class)
           end
         end
       end

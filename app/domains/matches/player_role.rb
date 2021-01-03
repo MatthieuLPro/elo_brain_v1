@@ -7,13 +7,13 @@ module Matches
       @player2 = player2
     end
 
-    def winner
+    def winner_id
       return @player1.id if player1_score_is_greater_than_player2_score
 
       @player2.id
     end
 
-    def looser
+    def looser_id
       return @player1.id unless player1_score_is_greater_than_player2_score
 
       @player2.id

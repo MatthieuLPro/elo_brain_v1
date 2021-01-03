@@ -2,10 +2,9 @@
 
 module Matches
   module Contracts
-    class Player < Dry::Validation::Contract
+    class PlayerResult < Dry::Validation::Contract
       params do
         required(:id).value(:integer)
-        required(:name).value(:string)
         required(:score).value(:integer)
       end
 

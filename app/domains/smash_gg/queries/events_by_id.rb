@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: Should add sorting by completedAt
 module SmashGg
   module Queries
     class EventsById

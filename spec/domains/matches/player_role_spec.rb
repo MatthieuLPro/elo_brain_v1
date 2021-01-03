@@ -17,7 +17,7 @@ module Matches
     end
 
     describe '#winner' do
-      subject { instance.winner }
+      subject { instance.winner_id }
       context 'with player1 has greater score than player2' do
         let(:player1) { player_with_greater_score }
         let(:player2) { player_with_lower_score }
@@ -29,7 +29,7 @@ module Matches
     end
 
     describe '#looser' do
-      subject { instance.looser }
+      subject { instance.looser_id }
       context 'with player1 has greater score than player2' do
         let(:player1) { player_with_greater_score }
         let(:player2) { player_with_lower_score }

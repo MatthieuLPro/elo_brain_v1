@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: Remove this and replace with create_entity_with_contract class
 module Entity
   class EntityCreator
     def initialize(entity:)

@@ -5,7 +5,7 @@ module ApiQueries
     class TournamentFromGameLocationDate
       DAY = 86_400
       BEFORE_DATE = (Time.now.to_i - DAY).to_s
-      AFTER_DATE = (Time.now.to_i - DAY * 30).to_s
+      AFTER_DATE = (Time.now.to_i - DAY * 2).to_s
       EVENTS_PER_PAGE_DEFAULT = 10
 
       def call(place:, radius:, game:)

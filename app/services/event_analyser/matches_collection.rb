@@ -11,8 +11,9 @@ module EventAnalyser
     end
 
     def call
-      @event_matches.each do |match|
-        next unless match_exist(match[MATCH_NODE])
+      # TODO: Should remove reverse here and sort matches in query
+      @event_matches.reverse.each do |match|
+        next unless Matches::MatchExist.new.call(match_information: match[MATCH_NODE])
 
         display_score = Regex::DisplayScore.new.call(expression: match[MATCH_NODE])
         match_result = MatchAnalyser::CreateResult.new.call(display_score: display_score)
@@ -28,13 +29,6 @@ module EventAnalyser
     end
 
     private
-
-    def match_exist(match_information)
-      Matches::RunConditions.new(
-        Matches::Conditions::DoesNotExist.new(match_information: match_information),
-        Matches::Conditions::NotPlayed.new(match_information: match_information)
-      ).is_played?
-    end
 
     def match_completed_date(match_information)
       Time.at(match_information[MATCH_DATE])

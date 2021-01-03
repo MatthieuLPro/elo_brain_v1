@@ -8,20 +8,25 @@ module MatchAnalyser
     MATCH_CONTRACT = AdaptedContracts::Match.new
     MATCH_ENTITY = Matches::Entities::Match
 
-    PLAYER_CONTRACT = AdaptedContracts::Player.new
-    PLAYER_ENTITY = Matches::Entities::Player
+    PLAYER_RESULT_CONTRACT = AdaptedContracts::PlayerResult.new
+    PLAYER_RESULT_ENTITY = Matches::Entities::PlayerResult
 
     RESULT_CONTRACT = AdaptedContracts::Result.new
     RESULT_ENTITY = Matches::Entities::Result
 
     def call(display_score:)
       new_match = ENTITY_WITH_CONTRACT.new(contract: match_contract(display_score)).call(entity: MATCH_ENTITY)
-      player1_id = ENTITY_WITH_CONTRACT.new(contract: player_contract(new_match.player1_name, new_match.player1_score)).call(entity: PLAYER_ENTITY).id
-      player2_id = ENTITY_WITH_CONTRACT.new(contract: player_contract(new_match.player2_name, new_match.player2_score)).call(entity: PLAYER_ENTITY).id
-      ENTITY_WITH_CONTRACT.new(contract: result_contract(player1_id, player2_id)).call(entity: RESULT_ENTITY)
+      player1 = ENTITY_WITH_CONTRACT.new(contract: player_contract(new_match.player1_name, new_match.player1_score)).call(entity: PLAYER_RESULT_ENTITY)
+      player2 = ENTITY_WITH_CONTRACT.new(contract: player_contract(new_match.player2_name, new_match.player2_score)).call(entity: PLAYER_RESULT_ENTITY)
+      player_roles = player_role(player1, player2)
+      ENTITY_WITH_CONTRACT.new(contract: result_contract(player_roles.winner_id, player_roles.looser_id)).call(entity: RESULT_ENTITY)
     end
 
     private
+
+    def player_role(player1, player2)
+      Matches::PlayerRole.new(player1: player1, player2: player2)
+    end
 
     def result_contract(winner_id, looser_id)
       RESULT_CONTRACT.call(winner_id: winner_id, looser_id: looser_id)
@@ -36,7 +41,7 @@ module MatchAnalyser
 
     # TODO: See Top TODO
     def player_contract(name, score)
-      PLAYER_CONTRACT.call(id: Players::FindOrCreate.new.call(name: name), name: name, score: score)
+      PLAYER_RESULT_CONTRACT.call(id: Players::FindOrCreate.new.call(name: name), score: score)
     end
   end
 end
