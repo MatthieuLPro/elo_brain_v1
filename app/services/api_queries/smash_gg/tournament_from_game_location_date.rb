@@ -6,6 +6,8 @@ module ApiQueries
       DAY = 86_400
       BEFORE_DATE = (Time.now.to_i - DAY).to_s
       AFTER_DATE = (Time.now.to_i - DAY * 2).to_s
+      # BEFORE_DATE = '1608418930'
+      # AFTER_DATE = '1608339730'
       EVENTS_PER_PAGE_DEFAULT = 10
 
       def call(place:, radius:, game:)
@@ -21,8 +23,8 @@ module ApiQueries
 
       def create_area_entity(place, radius)
         area_adapted_contract = AdaptedContracts::Creator.new.call(contract: AdaptedContracts::Area.new.call(
-          coordinates: AdaptedParameters::SmashGg::Area.new.coordinates(place: place),
-          radius: AdaptedParameters::SmashGg::Area.new.radius(radius: radius)
+          coordinates: ::SmashGg::CreateCoordinates.new.call(place: place),
+          radius: ::SmashGg::CreateRadius.new.call(radius: radius)
         ))
         Entity::EntityCreator.new(entity: ::SmashGg::Entities::Area).call(adapted_contract: area_adapted_contract)
       end
@@ -34,7 +36,7 @@ module ApiQueries
 
       def create_game_entity(game)
         game_adapted_contract = AdaptedContracts::Creator.new.call(contract: AdaptedContracts::Game.new.call(
-          game_id: AdaptedParameters::SmashGg::Game.new.id(game: game)
+          game_id: ::SmashGg::CreateGame.new.call(game: game)
         ))
         Entity::EntityCreator.new(entity: ::SmashGg::Entities::Game).call(adapted_contract: game_adapted_contract)
       end

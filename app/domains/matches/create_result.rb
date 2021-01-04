@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # TODO: We create a player if does not exist => Should be in different file ? YES
-module MatchAnalyser
+module Matches
   class CreateResult
     ENTITY_WITH_CONTRACT = Entity::CreateEntityWithContract
 

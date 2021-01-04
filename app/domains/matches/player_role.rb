@@ -8,20 +8,20 @@ module Matches
     end
 
     def winner_id
-      return @player1.id if player1_score_is_greater_than_player2_score
+      return @player1.id if player1_beat_player2
 
       @player2.id
     end
 
     def looser_id
-      return @player1.id unless player1_score_is_greater_than_player2_score
+      return @player1.id unless player1_beat_player2
 
       @player2.id
     end
 
     private
 
-    def player1_score_is_greater_than_player2_score
+    def player1_beat_player2
       @player1.score > @player2.score
     end
   end

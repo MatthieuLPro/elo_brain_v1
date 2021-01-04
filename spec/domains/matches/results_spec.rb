@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 module Matches
-  describe Consequences do
-    let(:instance) { described_class.new(result: result) }
+  describe Results do
+    let(:instance) { described_class.new }
     let(:match_result) do
       double
         .tap { |winner| allow(winner).to receive(:winner_id) { 1 } }
@@ -14,7 +14,7 @@ module Matches
     let!(:player2) { FactoryBot.create(:player, name: 'bar', id: 2) }
 
     describe '#call' do
-      subject { instance.call }
+      subject { instance.call(result: result) }
       context 'without specific NewElos class' do
         let(:result) { match_result }
 

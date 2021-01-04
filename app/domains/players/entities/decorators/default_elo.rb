@@ -6,8 +6,12 @@ module Players
       class DefaultElo
         DEFAULT_VALUE = ::Elo::STARTING_ELO
 
+        def initialize(starting_elo: DEFAULT_VALUE)
+          @starting_elo = starting_elo
+        end
+
         def call(value:)
-          return DEFAULT_VALUE if value.count.zero?
+          return @starting_elo if value.count.zero?
 
           value.last_level
         end

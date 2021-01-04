@@ -11,7 +11,7 @@ module Admin
     end
 
     def events
-      @events = ::ElosRepo.new.index
+      @events = ::EventsRepo.new.index
     end
 
     def players
