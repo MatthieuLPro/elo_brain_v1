@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: SmashGG oriented ('nodes')
 module Tournaments
   module Collections
     class TournamentsByLocation

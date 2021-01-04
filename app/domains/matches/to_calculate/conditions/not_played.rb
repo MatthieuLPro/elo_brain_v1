@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: Very specific to SmashGg API
 module Matches
   module ToCalculate
     module Conditions

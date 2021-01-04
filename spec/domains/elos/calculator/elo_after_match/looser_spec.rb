@@ -12,7 +12,12 @@ module Elos
         let(:probability_of_win) { 0.5 }
 
         describe '#call' do
-          subject { instance.call(development_coefficient: development_coefficient, probability_of_win: probability_of_win) }
+          subject do
+            instance.call(
+              development_coefficient: development_coefficient,
+              probability_of_win: probability_of_win
+            )
+          end
           it 'expected to be lower than current_elo' do
             expect(subject).to be < current_elo
           end

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: SmashGg oriented (DisplayScore)
 module Matches
   class CreateMatch
     DEFAULT_REPO = MatchesRepo.new
