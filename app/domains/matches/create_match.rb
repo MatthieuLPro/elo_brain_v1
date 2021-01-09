@@ -1,14 +1,11 @@
 # frozen_string_literal: true
 
-# TODO: SmashGg oriented (DisplayScore)
 module Matches
   class CreateMatch
     DEFAULT_REPO = MatchesRepo.new
-    DEFAULT_CREATOR = Matches::CreateResult.new
 
-    def initialize(repo: DEFAULT_REPO, creator: DEFAULT_CREATOR)
+    def initialize(repo: DEFAULT_REPO)
       @repo = repo
-      @creator = creator
     end
 
     def call(match_date:, match_score:, event_id:)
@@ -25,8 +22,19 @@ module Matches
     private
 
     def match_score(match_information)
+      # This regex is smashGg oriented
+      # The score should be regex before call in this class
       score = Regex::DisplayScore.new.call(expression: match_information)
-      @creator.call(display_score: score)
+      new_match = Entity::CreateEntityWithContract.new(contract: match_contract(score))
+                                                  .call(entity: Matches::Entities::Match)
+      Matches::CreateResult.new.call(match: new_match)
+    end
+
+    def match_contract(score)
+      Matches::Contracts::Match.new.call(player1_name: score[:player1_name],
+                                         player1_score: score[:player1_score],
+                                         player2_name: score[:player2_name],
+                                         player2_score: score[:player2_score])
     end
 
     def match_completed_date(match_information)
