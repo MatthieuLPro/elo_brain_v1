@@ -2,18 +2,22 @@
 
 module Matches
   class CreateElos
-    DEFAULT_ELO_CREATOR = ::Elos::CreateElo.new
     DEFAULT_MATCH_RESULTS = Matches::Results.new
 
-    def initialize(elo_creator: DEFAULT_ELO_CREATOR, match_results: DEFAULT_MATCH_RESULTS)
-      @elo_creator = elo_creator
+    def initialize(match_results: DEFAULT_MATCH_RESULTS)
       @match_results = match_results
     end
 
     def call(match:)
       match_results = @match_results.call(result: match)
-      @elo_creator.call(player_id: match.winner_id, level: match_results.winner, match_id: match.id)
-      @elo_creator.call(player_id: match.looser_id, level: match_results.looser, match_id: match.id)
+      create_elo_from_repo(match.winner_id, match_results.winner, match.id)
+      create_elo_from_repo(match.looser_id, match_results.looser, match.id)
+    end
+
+    private
+
+    def create_elo_from_repo(player_id, level, match_id)
+      ElosRepo.new.create_from(player_id: player_id, level: level, match_id: match_id)
     end
   end
 end

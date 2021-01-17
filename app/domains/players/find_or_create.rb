@@ -8,7 +8,7 @@ module Players
     end
 
     def call(name:)
-      (@repository.find_by(name: name) || @repository.create_with(name: name)).id
+      @repository.find_by(name: name) || @repository.create_with(name: name)
     end
   end
 end

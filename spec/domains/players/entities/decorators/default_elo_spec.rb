@@ -10,20 +10,20 @@ module Players
 
         describe '#call' do
           subject { instance.call(value: value) }
-          context 'with count of value is equal to zero' do
-            let(:value) { double.tap { |elo| allow(elo).to receive(:count) { 0 } } }
+          context 'with player has no elos associations' do
+            let(:value) { nil }
             it 'expected to return default value' do
               expect(subject).to eq(::Elo::STARTING_ELO)
             end
           end
 
-          context 'with count of value is different to zero' do
+          context 'with player is associated with an elo' do
             let(:value) do
               double
-                .tap { |elo| allow(elo).to receive(:count) { 1 } }
-                .tap { |elo| allow(elo).to receive(:last_level) { 1_000 } }
+                .tap { |elo| allow(elo).to receive(:nil) { false } }
+                .tap { |elo| allow(elo).to receive(:level) { 1_000 } }
             end
-            it 'expected to return the last value of elo' do
+            it 'expected to return the level of elo' do
               expect(subject).to eq(1_000)
             end
           end

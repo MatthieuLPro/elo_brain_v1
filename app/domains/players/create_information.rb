@@ -20,7 +20,7 @@ module Players
       CONTRACT.new.call(
         id: @player_id,
         nb_matches: nb_matches(elos_collection_data),
-        current_elo: current_player_elo(elos_collection_data)
+        current_elo: current_player_elo(last_elo)
       )
     end
 
@@ -28,14 +28,18 @@ module Players
       ELOS_REPOSITORY.index_per_player(player_id: @player_id)
     end
 
+    def last_elo
+      ELOS_REPOSITORY.player_last_elo(player_id: @player_id)
+    end
+
     def nb_matches(elos_collection)
       MATCHES_REPOSITORY.nb_matches_by(elos_collection: elos_collection)
     end
 
-    def current_player_elo(elos_collection)
+    def current_player_elo(last_elo)
       Players::Entities::Decorators::WithDefault
         .new(default: Players::Entities::Decorators::DefaultElo.new)
-        .decorate(value: elos_collection)
+        .decorate(value: last_elo)
     end
   end
 end

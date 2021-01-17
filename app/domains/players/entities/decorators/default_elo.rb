@@ -11,9 +11,9 @@ module Players
         end
 
         def call(value:)
-          return @starting_elo if value.count.zero?
+          return @starting_elo if value.nil?
 
-          value.last_level
+          value.level
         end
       end
     end

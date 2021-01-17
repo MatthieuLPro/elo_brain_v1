@@ -14,32 +14,18 @@ describe ElosRepo do
   let!(:elo1) { FactoryBot.create(:elo, match: match1, player: player1, level: 1_000) }
   let!(:elo2) { FactoryBot.create(:elo, match: match1, player: player2, level: 1_100) }
 
-  describe '#index' do
-    subject { instance.index }
-
-    it 'finds all elos' do
-      expect(subject.count).to eq(2)
-    end
-  end
-
   describe '#index_per_player' do
     subject { instance.index_per_player(player_id: player_id) }
     context 'with valid parameter' do
       let(:player_id) { 1 }
 
+      it 'creates a list of entities' do
+        expect(subject.class).to eq(Array)
+        expect(subject.first.class).to eq(::Elos::Entities::Elo)
+      end
+
       it 'finds the player elos' do
         expect(subject.count).to eq(1)
-      end
-    end
-  end
-
-  describe '#index_per_match' do
-    subject { instance.index_per_match(match_id: match_id) }
-    context 'with valid parameter' do
-      let(:match_id) { 1 }
-
-      it 'finds the match elos' do
-        expect(subject.count).to eq(2)
       end
     end
   end
@@ -51,20 +37,13 @@ describe ElosRepo do
       let(:level) { 1_200 }
       let(:match_id) { 1 }
 
+      it 'create an entity' do
+        expect(subject.class).to eq(::Elos::Entities::Elo)
+      end
+
       it 'creates a elo' do
         expect { subject }.to change { Elo.count }.by(1)
       end
     end
   end
-
-  # describe '#elos_by_player' do
-  #   subject { instance.nb_matches_by(elos_collection: elos_collection) }
-  #   context 'with many elos in collection' do
-  #     let(:elos_collection) { double.tap { |elos| allow(elos).to receive(:count) { 1 } } }
-  #
-  #     it 'expected to create an hash' do
-  #       expect(subject).to eq(1)
-  #     end
-  #   end
-  # end
 end

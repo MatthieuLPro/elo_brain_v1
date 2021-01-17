@@ -9,19 +9,19 @@ module Players
 
     describe '#call' do
       subject { instance.call(name: name) }
-      context 'with existing player' do
+      context 'is looking for an existing player' do
         let(:name) { 'foo' }
 
-        it 'returns an existing player id' do
-          expect(subject).to eq(player.id)
+        it 'returns an existing player' do
+          expect(subject.id).to eq(player.id)
         end
       end
 
-      context 'with existing player' do
+      context 'is looking for a non existing player' do
         let(:name) { 'bar' }
 
-        it 'returns new player id' do
-          expect(subject).to_not eq(player.id)
+        it 'returns new player' do
+          expect(subject.id).to_not eq(player.id)
         end
       end
     end

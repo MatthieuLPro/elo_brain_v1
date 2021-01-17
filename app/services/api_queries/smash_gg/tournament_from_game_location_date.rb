@@ -17,8 +17,7 @@ module ApiQueries
       end
 
       def call
-        query_parameters = create_query_parameters
-        ::SmashGg::Queries::TournamentsByGameLocationDate.new.call(params: query_parameters)
+        ::SmashGg::Queries::TournamentsByGameLocationDate.new.call(params: create_query_parameters)
       end
 
       private
@@ -26,24 +25,24 @@ module ApiQueries
       def create_query_parameters
         Entity::CreateEntityWithContract.new(contract: AdaptedContracts::TournamentsParameters.new.call(
           events_per_page: EVENTS_PER_PAGE_DEFAULT,
-          area: create_area_entity,
-          dates_range: create_dates_range_entity,
-          game: create_game_entity
+          area: create_area,
+          dates_range: create_dates_range,
+          game: create_game
         ))
                                         .call(entity: ::SmashGg::Entities::TournamentsParameters)
       end
 
-      def create_area_entity
+      def create_area
         Entity::CreateEntityWithContract.new(contract: AdaptedContracts::Area.new.call(coordinates: @coordinates, radius: @radius))
                                         .call(entity: ::SmashGg::Entities::Area)
       end
 
-      def create_dates_range_entity
+      def create_dates_range
         Entity::CreateEntityWithContract.new(contract: AdaptedContracts::DatesRange.new.call(before_date: BEFORE_DATE, after_date: AFTER_DATE))
                                         .call(entity: ::SmashGg::Entities::DatesRange)
       end
 
-      def create_game_entity
+      def create_game
         Entity::CreateEntityWithContract.new(contract: AdaptedContracts::Game.new.call(game_id: @game_id))
                                         .call(entity: ::SmashGg::Entities::Game)
       end

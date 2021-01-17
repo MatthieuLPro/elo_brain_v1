@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: Should find a better module naming
 module Collection
   class LaunchFormatWithData
     def call(collection_type:, data:)

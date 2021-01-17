@@ -16,7 +16,7 @@ module Matches
       # TODO: Create the player in other class
       # Should create player before create match
       # Should create player after regex displayScore
-      player_id = Players::FindOrCreate.new.call(name: name)
+      player_id = Players::FindOrCreate.new.call(name: name).id
       player_score = score
       Entity::CreateEntityWithContract.new(contract: AdaptedContracts::PlayerResult.new.call(id: player_id, score: player_score))
                                       .call(entity: Matches::Entities::PlayerResult)
