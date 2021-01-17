@@ -3,7 +3,7 @@
 module Events
   class CreateEvent
     REPOSITORY = EventsRepo.new
-    MATCHES_COLLECTION = Events::CreateMatches.new
+    MATCHES_COLLECTION = Matches::CreateMatchesFromEvent.new
 
     def call(events_collection:)
       events_collection.each do |event|

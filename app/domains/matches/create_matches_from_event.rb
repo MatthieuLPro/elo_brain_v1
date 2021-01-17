@@ -3,8 +3,8 @@
 # TODO: Cette class est trop spécifique a SmashGg
 # Soit rename cette class en CreateMatchesFromSmashGg
 # ou écrire une classe généraliste
-module Events
-  class CreateMatches
+module Matches
+  class CreateMatchesFromEvent
     # SmashGg values
     MATCH_SCORE = 'displayScore'
     MATCH_DATE = 'completedAt'
@@ -14,7 +14,7 @@ module Events
         next unless match_is_valid(match[MATCH_SCORE])
 
         current_match = Matches::CreateMatch.new.call(match_date: match[MATCH_DATE], match_score: match[MATCH_SCORE], event_id: event_id)
-        Matches::CreateElos.new.call(match: current_match)
+        Elos::CreateElosFromMatch.new.call(match: current_match)
       end
     end
 

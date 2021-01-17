@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-module Matches
-  describe CreateElos do
+module Elos
+  describe CreateElosFromMatch do
     let(:instance) { described_class.new }
     let!(:event) { FactoryBot.create(:event, name: 'foo-event', id: 1) }
     let!(:player1) { FactoryBot.create(:player, name: 'foo', id: 1) }

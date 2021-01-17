@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Matches
-  class CreateElos
+module Elos
+  class CreateElosFromMatch
     DEFAULT_MATCH_RESULTS = Matches::Results.new
 
     def initialize(match_results: DEFAULT_MATCH_RESULTS)
