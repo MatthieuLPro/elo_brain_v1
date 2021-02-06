@@ -15,36 +15,21 @@ module Elos
     end
 
     def call
-      Entity::CreateEntityWithContract
-        .new(contract: CONTRACT.call(winner_elo: winner_elo, looser_elo: looser_elo))
-        .call(entity: ENTITY)
-    end
-
-    private
-
-    def winner_elo
-      ::Elos::Calculator::PlayerElo
-        .new(elo_after_match: Calculator::EloAfterMatch::Winner)
-        .call(player: create_player(@winner_information, @looser_information))
-    end
-
-    def looser_elo
-      ::Elos::Calculator::PlayerElo
-        .new(elo_after_match: Calculator::EloAfterMatch::Looser)
-        .call(player: create_player(@looser_information, @winner_information))
-    end
-
-    def create_player(player_information, opponent_information)
-      constantes = ::Elos::Constantes.new(
-        nb_matches: player_information.nb_matches,
-        player_elo: player_information.current_elo,
-        opponent_elo: opponent_information.current_elo
+      player1 = EloBrain::Players::Player.from(
+        elo: winner_information.current_elo,
+        nb_matches: winner_information.nb_matches,
+        situation: 'winner'
       )
-      ::Elos::CreatePlayer.new(
-        information: player_information,
-        coefficient: constantes.development_coefficient,
-        probability: constantes.probability_of_win
-      ).call
+      player2 = EloBrain::Players::Player.from(
+        elo: looser_information.current_elo,
+        nb_matches: looser_information.nb_matches,
+        situation: 'looser'
+      )
+      new_elos = EloBrain::Matches::Match.from(player1: player1, player2: player2).calculate_new_elos
+
+      Entity::CreateEntityWithContract
+        .new(contract: CONTRACT.call(winner_elo: new_elos.player1_new_elo, looser_elo: new_elos.player2_new_elo))
+        .call(entity: ENTITY)
     end
   end
 end
