@@ -42,6 +42,9 @@ gem 'jwt', '~> 2.2.2'
 # Job processing service
 gem 'sidekiq', '~> 6.1.1'
 
+# Elo Calculation
+gem 'elo_brain', '~> 1.1.0'
+
 group :development, :test do
   gem 'pry-byebug', '~> 3.9.0'
   gem 'pry-rails', '= 0.3.9'
