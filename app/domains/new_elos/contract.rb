@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Elos
+module NewElos
   class Contract < Dry::Validation::Contract
     params do
       required(:winner_elo).value(:integer)

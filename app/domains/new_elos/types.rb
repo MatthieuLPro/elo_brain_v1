@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Elos
+module NewElos
   module Types
     include Dry.Types()
   end

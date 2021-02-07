@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Elos
-  class NewElos < Dry::Struct
+module NewElos
+  class Entity < Dry::Struct
     attribute :winner, Types::Strict::Integer
     attribute :looser, Types::Strict::Integer
 
