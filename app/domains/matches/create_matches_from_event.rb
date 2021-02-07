@@ -13,7 +13,8 @@ module Matches
       event_matches.reverse.each do |match|
         next unless match_is_valid(match[MATCH_SCORE])
 
-        current_match = Matches::CreateMatch.new.call(match_date: match[MATCH_DATE], match_score: match[MATCH_SCORE], event_id: event_id)
+        current_match = Matches::CreateMatch.new.call(match_date: match[MATCH_DATE], match_score: match[MATCH_SCORE],
+                                                      event_id: event_id)
         Elos::CreateElosFromMatch.new.call(match: current_match)
       end
     end

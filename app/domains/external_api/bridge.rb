@@ -15,8 +15,8 @@ module ExternalApi
 
     private
 
-    def execute_request
-      Try[HTTParty::Error] { yield }.then { |request| extract_body(request) }
+    def execute_request(&block)
+      Try[HTTParty::Error, &block].then { |request| extract_body(request) }
     end
 
     def post(uri, body)
