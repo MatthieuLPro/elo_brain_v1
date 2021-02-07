@@ -9,7 +9,7 @@ module NewElos
         new_elos = EloBrain::Matches::Match.from(player1: player1, player2: player2).calculate_new_elos
         contract = NewElos::Contract.new.call(winner_elo: new_elos[:player1_new_elo],
                                               looser_elo: new_elos[:player2_new_elo])
-        NewElos::Entity.from_contract(contract: contract)
+        NewElos::NewElo.from_contract(contract: contract)
       end
 
       private

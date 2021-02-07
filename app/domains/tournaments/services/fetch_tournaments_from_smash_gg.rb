@@ -2,16 +2,16 @@
 
 module Tournaments
   module Services
-    class FetchNewTournamentsFromSmashGg
+    class FetchTournamentsFromSmashGg
       def call
         tournaments = ::SmashGg::Services::FetchTournaments.new.call
-        tournaments = create_tournmanent_with_events(tournaments)
+        tournaments = create_tournament_with_events(tournaments)
         tournaments = create_tournament_with_events_with_matches(tournaments)
       end
 
       private
 
-      def create_tournmanent_with_events(tournaments)
+      def create_tournament_with_events(tournaments)
         tournaments.map do |tournament|
           events = tournament.events.map do |event|
             ::SmashGg::Services::FetchEvent.new.call(event_id: event['id'])

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Events
-  class EventsRepository
+  class Repository
     def from_smash_gg(query:)
       event = ExternalApi::Facades::SmashGg.new.run_alpha_end_point(
         parameter: SmashGg::ApiParameters::Entity.new(query: query, operation_name: nil, variables: nil)

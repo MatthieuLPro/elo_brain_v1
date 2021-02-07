@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ExternalApi
-  module Entities
+  module SmashGg
     module Types
       include Dry.Types()
     end

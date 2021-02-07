@@ -4,7 +4,7 @@ module ExternalApi
   class Bridge
     include Dry::Monads[:result, :try]
 
-    def initialize(base_url: ENV['SMASH_GG_API_URL'], token: ENV['SMASH_GG_TOKEN'])
+    def initialize(base_url:, token:)
       @base_url = base_url
       @token = token
     end
